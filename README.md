@@ -1,58 +1,157 @@
-# Movie Project
 
-## Overview
+# 🎬 Movie Streaming App
 
-Working with APIs to make our websites interactive sits at the core of frontend web development. At the end, frontend websites work as interfaces that give us the ability to interact with data. All this data is coming from some form of an API.
+<div align="center">
+   <img src="./screenshots/image-1.png" alt="Movie Page" width="100%" style="margin-bottom:20px">
 
-The API you will be interacting with is a movie API that can be used to retrieve information about movies and actors. It is quite extensive and serves many purposes for your needs. In addition to that, it has quite a versatile searching mechanism that gives you the ability to reach for the information you need.
+---
 
-## How to make use of this WIKI?
+<div align="center">
+  Made with ❤️ by [Ahmed Al-Sanadi]
+  
+  ⭐ Star this repo if you find it helpful!
+</div>
 
-As you can see, the only thing you received from us is a bunch of `.md` (Markdown) files like the one you're reading now. We want you to learn to build your own projects from scratch and see how the process is done. So, we have created the following things in the wiki to help you out with the preparation:
+  
+  ![Next.js](https://img.shields.io/badge/Next.js-14.2.11-black?logo=next.js)
+  ![React](https://img.shields.io/badge/React-18-blue?logo=react)
+  ![Tailwind](https://img.shields.io/badge/Tailwind-3.4.1-38B2AC?logo=tailwind-css)
+  ![Firebase](https://img.shields.io/badge/Firebase-10.14.1-FFCA28?logo=firebase)
+  ![License](https://img.shields.io/badge/License-MIT-green.svg)
+</div>
 
-1. Setup - This page contains the steps you need to setup the project. **Only one of you will do it, while the others watch and support them**
-2. Requirements - This page contains the requirements that you need to do for the project.
-3. Presentation - This page contains the requirements that you need to do when presenting.
+## ✨ Overview
 
-To make the best use of this Wiki, go first to the requirements, understand them, then go to the score guide, understand it, then finally head to the setup page so you can do the setup with everything in mind.
+Experience cinema like never before with our feature-rich movie streaming platform! Built with cutting-edge technologies, this app brings the magic of movies and TV shows right to your screen, complete with a seamless user experience and stunning visual design.
 
-## Key takeaways 🎉
 
-If you finish this project you can be absolutely sure that you can work on any project in the future. Generally, you will be able to use the same tools and techniques you used here to build any website in the future.
+**Why you'll love this app**:
+- 🍿 **Discover, explore, and save** your favorite movies and TV shows.
+- 🎨 **Dark/Light Mode** for a tailored viewing experience.
+- 🌍 **Multi-language Support** for diverse audiences.
 
-#### Things you will practice while working on this project
+## 🚀 Key Features
 
-You will be able to practice:
+### 🎯 Core Functionality
+- **🔍 Advanced Search & Discovery**: Search movies, shows, or actors with ease.
+- **💡 Light/Dark Mode**: Switch between sleek dark and clean light modes.
+- **🌐 Multi-language Support**: Available in **English**, **Arabic**, and **French**.
+- **🧑‍💻 Personalized User Profiles**: Keep track of your favorite movies and shows in your watchlist.
+- **📱 Fully Responsive**: Looks great on any screen size, from mobile to desktop.
 
-- Dividing tasks as components between the team and avoiding most conflict issues.
-- Using states and setters to change the state of the component.
-- Using props to pass data from one component to another.
-- Using static-site generation and server-side rendering to fetch data and add them to pages.
-- Preparing folder structure in a way that makes your, and everyone elses work easier.
-- Adding new dependencies and how to use them.
-- Reading the documentation of the packages you use.
-- Reading the documentation of APIs and how to understand them.
-- Using Authentication tokens in your project.
-- Using routes to navigate between pages.
-- Using local storage to store information.
-- Using UI Kits to make styling components easier.
+### 🛠️ Technical Features
+- **⚡ Next.js**: Enjoy lightning-fast server-side rendering for a smooth user experience.
+- **🔥 Firebase**: Authentication, data storage, and more, seamlessly integrated.
+- **🎨 Tailwind CSS**: A utility-first CSS framework for rapid UI development.
+- **🌍 i18next**: Effortless multi-language support for a global user base.
 
-#### Concerns to avoid
+## 🎨 Screenshots Showcase
 
-The following thoughts are traps; steer away from them:
+<details>
+<summary>Click to expand and explore the visual beauty</summary>
 
-- _`This project is huge! I don't think I'm going to be able to do it.`_ From your previous experiences, you know for a fact that everything starts big in the beginning but when you plan things and work on them they usually are not as big and scary as you thought.
-- _`I don't know how to use [insert tool here] how am I going to deal with all of this?`_ Again, don't worry. You have dealt with so many unknown things and just like you learned how to use them, you will be able to learn how to use any tool you want as long as you check its documentation.
-- _`[Right from the beginning] How am I going to fix the bonus topic?`_ DON'T GO THERE UNLESS YOU FINISH THE MAIN REQUIREMENTS FIRST!
-- _`[After spending hours on an issue to fix it without reading the documentation or searching the issue on google] I will spend extra hours on this until I fix it`_ This is a trap. You should always read the documentation and search for the solution.
-- _`I'm so tired now!!!😩 I've been trying to fix this bug for 3 hours!!!`_ In times like these, consider steping away from your computer and doing something else like playing with your pet, watching something funny, looking outside your window and enjoying cool air.
+### 🎬 Movie Details & More
+<div align="center">
+  <img src="./screenshots/image.png" alt="Single Movie" width="45%" style="margin:10px;">
+  <img src="./screenshots/image-1.png" alt="Movie Overview" width="45%" style="margin:10px;">
+</div>
 
-#### Confidence boosters
+<div align="center">
+  <img src="./screenshots/image-9.png" alt="Movie List" width="45%" style="margin:10px;">
+  <img src="./screenshots/image-8.png" alt="Movie Trailer" width="45%" style="margin:10px;">
+</div>
 
-In times of doubts remember these:
+### 🏠 Home Experience
+<div align="center">
+  <img src="./screenshots/image-5.png" alt="Home Page" width="45%" style="margin:10px;">
+  <img src="./screenshots/image-6.png" alt="Light Mode" width="45%" style="margin:10px;">
+</div>
 
-- _`This project will be a huge addition to my already big list of projects that will increase my future prospects of getting hired`_
-- _`The internet is FULL of resources that any one can use to learn about anything.`_
-- _`I've worked on 3 projects. They seemed difficult in the beginning but I still aced them. I'm awesome!`_
-- _`3 months ago, my biggest issues and worries are how to write the correct class name to change an HTML element's color. Now, I'm dealing with bigger things because I've learned so much more. My current worries and issues will be my HTML and CSS of my future.`_
-- _`I'm not alone on this team. There are more people who got my back.`_
+### 👤 User Profile & Auth
+<div align="center">
+  <img src="./screenshots/image-11.png" alt="User Profile" width="45%" style="margin:10px;">
+  <img src="./screenshots/image-12.png" alt="Sign Up" width="45%" style="margin:10px;">
+</div>
+
+</details>
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+Before you begin, ensure you have the following installed:
+```bash
+Node.js v14+
+npm or yarn
+```
+
+### 🛠️ Installation & Setup
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/ahmedalsanadi/Movie-Streaming-App.git
+   cd Movie-Streaming-App
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Environment Configuration**
+
+   To fetch movie data and use Firebase services, create a `.env.local` file in the root of your project with the following environment variables:
+
+   ```bash
+   NEXT_PUBLIC_API_KEY=your_tmdb_api_key
+   NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key
+   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+   NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_firebase_project_id
+   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
+   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
+   NEXT_PUBLIC_FIREBASE_APP_ID=your_firebase_app_id
+   ```
+
+4. **Launch the app**
+   ```bash
+   npm run dev
+   ```
+
+Open your browser and navigate to `http://localhost:3000` to view the app!
+
+## 🎮 Features Guide
+
+### User Features
+- **🔐 Authentication**: Secure login, registration, and profile management with Firebase.
+- **🔍 Discovery**: Browse thousands of movies, TV shows, and actors.
+- **💾 Watchlists**: Add movies to your personalized list.
+- **🌍 Language Support**: Toggle between **English**, **Arabic**, and **French**.
+- **🌓 Light/Dark Mode**: A toggle for personalized viewing.
+
+### Developer Features
+- **🔧 ESLint & Prettier**: Ensure code quality with automated linting and formatting.
+- **🛠 Husky Hooks**: Pre-commit hooks ensure high code standards with **lint-staged**.
+
+## 🤝 Contributing
+
+We appreciate contributions! Here’s how you can contribute:
+
+1. **Fork the repository**
+2. **Create your feature branch** (`git checkout -b feature/AmazingFeature`)
+3. **Commit your changes** (`git commit -m 'Add some AmazingFeature'`)
+4. **Push to the branch** (`git push origin feature/AmazingFeature`)
+5. **Open a pull request**
+
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+
+---
+
+<div align="center">
+  Made with ❤️ by [Ahmed Al-Sanadi]
+  
+  ⭐ Star this repo if you find it helpful!
+</div>
+
+---
