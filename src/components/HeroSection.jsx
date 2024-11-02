@@ -10,7 +10,7 @@ const HeroSection = () => {
   console.log(currentUser)
 
   return (
-    <div className="relative w-full lg:h-[570px] h-[450px]  overflow-hidden">
+    <div className="relative w-full h-[650px] lg:h-[600px]   overflow-hidden">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
