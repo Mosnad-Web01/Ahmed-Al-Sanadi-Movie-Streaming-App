@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+* {
+  margin: 0;
+  padding: 0px;
+  box-sizing: border-box;
+}
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+.font-custom {
+  font-family: "YourFontFamily";
+}
+.circle-progress {
+  position: relative;
+
+  border-radius: 50%;
+  background: conic-gradient(
+    #FF8C00 calc(var(--progress, 0) * 1%),
+    #21163f calc(var(--progress, 0) * 1%)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5); 
+}
+
+.circle-progress::before {
+  content: "";
+  position: absolute;
+  width: 50px; 
+  height: 50px;
+  background-color:#111827; 
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.circle-progress .inner {
+  position: relative;
+  font-size: 14px; 
+  font-weight: bold;
+  z-index: 2;
+  text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.7); 
+}
+
+.circle-progress .inner span {
+  font-size: 10px; 
+  vertical-align: top;
+  margin-left: 2px;
+}
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

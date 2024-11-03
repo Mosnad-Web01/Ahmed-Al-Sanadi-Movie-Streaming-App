@@ -1,0 +1,40 @@
+{
+  "hero": {
+    "header1": "Films illimités,",
+    "header2": "Séries TV et bien plus encore",
+    "startingPrice": "À partir de USD 3.99. Annulez à tout moment.",
+    "readyToWatch": "Prêt à regarder ? Entrez votre email pour créer ou reprendre votre abonnement.",
+    "emailPlaceholder": "Adresse e-mail",
+    "getStarted": "Commencer >",
+    "welcome": "Bienvenue",
+    "enjoyContent": "Préparez-vous à plonger dans l'expérience ultime de divertissement !",
+    "enjoyContent1": "Films, séries à tout moment, n'importe où !"
+  },
+
+  "navbar": {
+    "Genres": "Genres",
+    "Movies": "Films",
+    "TV Shows": "Séries TV",
+    "Actors": "Acteurs",
+    "Popular": "Populaire",
+    "Top Rated": "Les mieux notés",
+    "Upcoming": "À venir",
+    "Now Playing": "En ce moment",
+    "Airing Today": "Diffusé aujourd'hui",
+    "On The Air": "À l'antenne"
+  },
+
+  "homeSection": {
+    "trending": "Tendances",
+    "whatsPopular": "Les Plus Populaires",
+    "freeToWatch": "Gratuit à Regarder",
+    "today": "Aujourd'hui",
+    "thisWeek": "Cette Semaine",
+    "streaming": "En Streaming",
+    "onTV": "À la Télévision",
+    "forRent": "À Louer",
+    "inTheaters": "Au Cinéma",
+    "movies": "Films",
+    "tv": "Télévision"
+  }
+}
