@@ -1,3 +1,4 @@
+//src/contexts/AuthContext.js
 "use client"
 import { createContext, useContext, useState, useEffect } from "react"
 import { auth, db } from "../firebase/config"

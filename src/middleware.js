@@ -4,31 +4,64 @@ import i18nConfig from "./i18nConfig";
 import { NextResponse } from 'next/server';
 
 export function middleware(request) {
-  // Language handling
-  const i18nResponse = i18nRouter(request, i18nConfig);
-
-  // Authentication logic
-  const protectedRoutes = ['/movie', '/tv', '/search', '/actors', '/profile']; // Define protected routes
-  const currentUser = request.cookies.get('currentUser')?.value;
-
-  // Check if the current route is protected
-  if (protectedRoutes.some(route => request.nextUrl.pathname.startsWith(route))) {
-    // If user is not authenticated, redirect to login
-    if (!currentUser) {
-      return NextResponse.redirect(new URL('/sign-in', request.url));
+  // Get the pathname from the URL
+  const pathname = request.nextUrl.pathname;
+  
+  // Extract locale from the pathname
+  const localePrefix = `/${pathname.split('/')[1]}`;
+  
+  // Check if user is authenticated via cookie
+  const isAuthenticated = request.cookies.has('currentUser');
+  
+  // Define public routes (accessible without authentication)
+  const publicRoutes = ['/', '/sign-in', '/sign-up'];
+  
+  // Check if the current path (without locale) is a public route
+  const isPublicRoute = publicRoutes.some(route => {
+    // Handle both root path and locale-prefixed root path
+    if (route === '/' && (pathname === '/' || pathname === localePrefix)) {
+      return true;
     }
+    // Handle other public routes with potential locale prefix
+    return pathname.endsWith(route) || pathname === `${localePrefix}${route}`;
+  });
+  
+  // Define authentication routes
+  const authRoutes = ['/sign-in', '/sign-up'];
+  
+  // Check if the current path is an auth route
+  const isAuthRoute = authRoutes.some(route => 
+    pathname.endsWith(route) || pathname === `${localePrefix}${route}`
+  );
+  
+  // Authentication logic
+  if (!isAuthenticated && !isPublicRoute) {
+    // User is not authenticated and trying to access a protected route
+    // Preserve the locale in the redirect URL
+    const locale = pathname.split('/')[1];
+    const signInUrl = i18nConfig.locales.includes(locale) 
+      ? `/${locale}/sign-in` 
+      : '/sign-in';
+    
+    return NextResponse.redirect(new URL(signInUrl, request.url));
   }
-
-  // If user is authenticated, restrict access to sign-in and sign-up
-  if (currentUser && ['/sign-in', '/sign-up'].includes(request.nextUrl.pathname)) {
-    return NextResponse.redirect(new URL('/', request.url)); // Redirect authenticated users to home if trying to access sign-in or sign-up
+  
+  if (isAuthenticated && isAuthRoute) {
+    // User is authenticated and trying to access sign-in or sign-up
+    // Preserve the locale in the redirect URL
+    const locale = pathname.split('/')[1];
+    const homeUrl = i18nConfig.locales.includes(locale) 
+      ? `/${locale}` 
+      : '/';
+    
+    return NextResponse.redirect(new URL(homeUrl, request.url));
   }
-
-  // Return the i18n response if no redirect happened
-  return i18nResponse;
+  
+  // Apply i18n routing after authentication checks
+  return i18nRouter(request, i18nConfig);
 }
 
-// Applies this middleware only to files in the app directory and ignores the below files
+// Applies this middleware only to relevant routes
 export const config = {
   matcher: "/((?!api|static|.*\\..*|_next).*)",
 };

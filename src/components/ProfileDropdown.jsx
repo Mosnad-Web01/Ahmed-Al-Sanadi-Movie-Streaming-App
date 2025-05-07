@@ -2,18 +2,18 @@ import { useAuth } from "@/contexts/AuthContext";
 import Link from "next/link";
 import { useState } from "react";
 import { FaSignInAlt, FaUser } from "react-icons/fa";
+import { useRouter } from 'next/navigation';
 
 const ProfileDropdown = () => {
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
-  
-  // Destructuring the values from useAuth
+  const router = useRouter();
   const { currentUser, logout } = useAuth(); 
 
-  // Handle logout click
   const handleLogout = async () => {
     try {
-      await logout();  // Calls the logout function
-      setShowProfileDropdown(false); // Close the dropdown after logging out
+      await logout();
+      setShowProfileDropdown(false);
+      router.push('/sign-in');
     } catch (error) {
       console.error("Failed to log out", error);
     }
@@ -22,14 +22,12 @@ const ProfileDropdown = () => {
   return (
     <div className="relative">
       <div
-        className="w-6 h-6  flex items-center justify-center rounded-full font-bold cursor-pointer"
+        className="w-6 h-6 flex items-center justify-center rounded-full font-bold cursor-pointer"
         onClick={() => setShowProfileDropdown(!showProfileDropdown)}
       >
-        {/* Show login link if no user, otherwise show user icon */}
         {!currentUser ? (
           <Link href="/sign-in">
             <div className="flex items-center justify-center gap-1 hover:text-cyan-500">
-           
               <FaSignInAlt size={20} />
             </div>
           </Link>
@@ -37,7 +35,6 @@ const ProfileDropdown = () => {
           <FaUser size={20} />
         )}
       </div>
-
       {/* Dropdown content */}
       {showProfileDropdown && currentUser && (
         <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-md shadow-lg p-6 font-custom">
