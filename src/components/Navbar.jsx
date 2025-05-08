@@ -15,6 +15,7 @@ import { logo } from "@/util/local-ImageConstants"
 import { fetchGenres } from "@/services/fetchGenres"
 import { useDarkMode } from "@/hooks/useDarkMode"
 import { useTranslation } from "react-i18next"
+import { useAuth } from "@/contexts/AuthContext"
 
 const NAV_LINKS_TEMPLATE = [
   { label: "Genres", dropdownItems: [] },
@@ -37,15 +38,16 @@ const Navbar = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [navLinks, setNavLinks] = useState(NAV_LINKS_TEMPLATE)
   const [isScrolled, setIsScrolled] = useState(false)
+  const { currentUser } = useAuth()
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen)
   const toggleSearch = () => setIsSearchOpen(!isSearchOpen)
-  
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10)
     }
-    
+
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -128,13 +130,17 @@ const Navbar = () => {
             {darkMode ? <FaSun size={20} /> : <FaMoon size={19} />}
           </div>
 
-          <div className="ml-2">
-            <button className="bg-[#e50914] text-white py-1 px-4 text-sm font-medium rounded hover:bg-[#f40612] transition-colors">
-              Sign In
-            </button>
-          </div>
-
-          <ProfileDropdown />
+          {!currentUser ? (
+            <div className="ml-2">
+              <Link href="/auth/signin">
+                <button className="bg-[#e50914] text-white py-1 px-4 text-sm font-medium rounded hover:bg-[#f40612] transition-colors">
+                  Sign In
+                </button>
+              </Link>
+            </div>
+          ) : (
+            <ProfileDropdown />
+          )}
         </div>
       </nav>
 
@@ -146,7 +152,7 @@ const Navbar = () => {
 
       <SearchBar isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </header>
-  );
+  )
 }
 
 export default Navbar

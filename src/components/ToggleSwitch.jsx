@@ -13,7 +13,7 @@ const ToggleSwitch = ({ options, selectedOption, onChange }) => {
               key={option.value}
               className={`py-1 px-4 rounded-full transition-all duration-700 ${
                 selectedOption === option.value
-                  ? "bg-[#032541] text-white"
+                  ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white focus:ring-pink-500"
                   : "text-gray-600"
               }`}
               onClick={() => onChange(option.value)}
