@@ -7,13 +7,13 @@ const ToggleSwitch = ({ options, selectedOption, onChange }) => {
     <div className="toggle-switch">
       {/* Original design for larger screens */}
       <div className="hidden sm:inline-flex items-center gap-4">
-        <div className="bg-gray-300 rounded-full flex items-center">
+        <div className="bg-gray-300 dark:bg-black/40  rounded-full flex items-center shadow-lg shadow-teal-500/10 ">
           {options.map((option) => (
             <button
               key={option.value}
               className={`py-1 px-4 rounded-full transition-all duration-700 ${
                 selectedOption === option.value
-                  ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white focus:ring-pink-500"
+                  ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white focus:ring-pink-500 shadow-lg shadow-pink-500/50"
                   : "text-gray-600"
               }`}
               onClick={() => onChange(option.value)}
