@@ -36,13 +36,23 @@ const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [navLinks, setNavLinks] = useState(NAV_LINKS_TEMPLATE)
+  const [isScrolled, setIsScrolled] = useState(false)
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen)
   const toggleSearch = () => setIsSearchOpen(!isSearchOpen)
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10)
+    }
+    
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   useEffect(() => {
     const updateNavLinksWithGenres = async () => {
-      const movieGenres = await fetchGenres(i18n.language) // Pass the current language
+      const movieGenres = await fetchGenres(i18n.language)
       setNavLinks((prevLinks) =>
         prevLinks.map((link) => {
           if (link.label === "Genres") {
@@ -54,26 +64,26 @@ const Navbar = () => {
     }
 
     updateNavLinksWithGenres()
-  }, [i18n.language]) // Re-fetch when language changes
+  }, [i18n.language])
 
   return (
-    <header className="bg-gray-200 dark:bg-gray-900 text-[#032541] dark:text-white sticky top-0 z-50 shadow-lg  transition-colors duration-300">
-      <nav className="container mx-auto h-16 flex items-center justify-between px-4 md:px-6">
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-black bg-opacity-90' : 'bg-gradient-to-b from-black to-transparent'}`}>
+      <nav className="container mx-auto h-16 flex items-center justify-between px-4 md:px-10">
         <div className="flex items-center gap-12">
           <div className="md:hidden">
             <MenuIcon
-              className="w-6 h-6 cursor-pointer"
+              className="w-6 h-6 cursor-pointer text-white"
               onClick={toggleSidebar}
             />
           </div>
 
           <Link href="/">
             <div className="cursor-pointer flex items-center space-x-2">
-              <span className="text-2xl font-bold text-[#5fcde4] lg:hidden">
+              <span className="text-2xl font-bold text-[#e50914] lg:hidden">
                 TMDB
               </span>
               <Image
-                className="w-36 h-5 hidden lg:block"
+                className="w-28 h-8 hidden lg:block"
                 src={logo}
                 alt="Logo"
                 style={{
@@ -83,7 +93,7 @@ const Navbar = () => {
             </div>
           </Link>
 
-          <div className="hidden md:flex space-x-4 text-sm font-medium">
+          <div className="hidden md:flex space-x-6 text-sm font-medium text-white">
             {navLinks.map((link, index) => (
               <LinkDropdown
                 key={index}
@@ -95,16 +105,16 @@ const Navbar = () => {
             ))}
             <Link
               href="/actors"
-              className="hover:text-[#01b4e4] flex items-center text-lg font-semibold"
+              className="hover:text-gray-300 flex items-center text-base font-normal"
             >
               {t("navbar.Actors")}
             </Link>
           </div>
         </div>
 
-        <div className="flex items-center gap-4 md:gap-4 mx-2">
+        <div className="flex items-center gap-4 md:gap-6 mx-2">
           <SearchIcon
-            className="w-6 h-6 hover:text-[#01b4e4] cursor-pointer md:block"
+            className="w-6 h-6 text-white hover:text-gray-300 cursor-pointer md:block"
             onClick={toggleSearch}
           />
           <div className="hidden sm:block">
@@ -113,9 +123,15 @@ const Navbar = () => {
           
           <div
             onClick={toggleDarkMode}
-            className="rounded-full p-1  border-1 border-solid border-gray-900 dark:border-none"
+            className="text-white cursor-pointer"
           >
             {darkMode ? <FaSun size={20} /> : <FaMoon size={19} />}
+          </div>
+
+          <div className="ml-2">
+            <button className="bg-[#e50914] text-white py-1 px-4 text-sm font-medium rounded hover:bg-[#f40612] transition-colors">
+              Sign In
+            </button>
           </div>
 
           <ProfileDropdown />
