@@ -32,7 +32,7 @@ const Banner = ({
         className="opacity-100 dark:opacity-50 object-cover"
         fill
         sizes="(max-width: 768px) 100vw, 50vw" />
-      <div className="absolute inset-0 bg-gradient-to-t from-gray-200 dark:from-gray-900 to-transparent transition-colors duration-300"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-gray-200 dark:from-black to-transparent transition-colors duration-300"></div>
       <div className="absolute bottom-0 left-0 p-8">
         <h1 className="text-4xl md:text-6xl font-bold mb-4">{title}</h1>
         {tagline && <p className="text-xl mb-2">{tagline}</p>}
