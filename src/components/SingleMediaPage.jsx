@@ -66,7 +66,7 @@ const SingleMediaPage = ({ media, mediaType }) => {
   const seasonsCount = mediaType === "tv" ? media.number_of_seasons : null;
 
   return (
-    <div className="bg-gray-200 dark:bg-gray-900 text-gray-900 dark:text-white min-h-screen transition-colors duration-300">
+    <div className="bg-gray-200 dark:bg-black text-gray-900 dark:text-white min-h-screen transition-colors duration-300 ">
       {/* Banner Section */}
       <Banner
         path={media.backdrop_path}
@@ -185,8 +185,6 @@ const SingleMediaPage = ({ media, mediaType }) => {
             </div>
           </div>
           {/* End of"You May Like" section -------------------*/}
-
-
       </div>
     </div>
     </div>

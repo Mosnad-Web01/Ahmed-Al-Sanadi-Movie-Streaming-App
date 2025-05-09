@@ -2,7 +2,7 @@ import Image from "next/image"
 import { footerImg } from '../util/local-ImageConstants'; 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900  text-white">
+    <footer className="bg-black  text-white">
       <div className=" py-16 container mx-auto flex flex-col justify-between items-center gap-4 md:flex-row md:items-start   border-t-[0.3px] border-gray-400">
         <nav className="flex flex-col gap-10">
           <div className="flex md:justify-end">

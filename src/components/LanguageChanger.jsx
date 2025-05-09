@@ -40,7 +40,7 @@ export default function LanguageChanger() {
     <select
       onChange={handleChange}
       value={currentLocale}
-      className=" bg-gray-200 dark:bg-gray-900  rounded-md py-1 px-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#01b4e4] focus:border-transparent"
+      className=" bg-gray-200 dark:bg-gray-950 rounded-md py-1 px-2 text-sm focus:outline-none focus:border-transparent"
     >
       <option value="en">EN</option>
       <option value="ar">AR</option>

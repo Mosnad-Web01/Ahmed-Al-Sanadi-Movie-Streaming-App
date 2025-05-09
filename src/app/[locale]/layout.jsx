@@ -44,7 +44,7 @@ export default async function RootLayout({ children, params: { locale } }) {
   return (
     <html lang={locale} dir={dir(locale)}>
       <body
-        className={` ${geistSans.variable} ${geistMono.variable} antialiased  bg-gray-200 dark:bg-gray-900 text-[#032541] dark:text-white  transition-colors duration-300 `}
+        className={` ${geistSans.variable} ${geistMono.variable} antialiased dark:bg-black dark:text-white bg-gray-200 text-[#032541]`}
       >
         <AuthProvider>
         <TranslationsProvider
@@ -54,7 +54,7 @@ export default async function RootLayout({ children, params: { locale } }) {
         >
           <main>
             <Navbar />
-            <div className="relative min-h-100">
+            <div className="relative  min-h-100">
               {children}
               <ToastContainer />
             </div>

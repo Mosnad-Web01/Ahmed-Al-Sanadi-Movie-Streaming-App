@@ -77,7 +77,7 @@ const SearchBar = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-start justify-center pt-16">
-      <div className="bg-white dark:bg-gray-800 w-full max-w-2xl rounded-lg shadow-lg overflow-hidden relative">
+      <div className="bg-gray-200 dark:bg-gray-950 w-full max-w-2xl rounded-lg shadow-lg overflow-hidden relative">
         <div className="p-4">
           <form action="/search" className="relative mt-3">
             <input
