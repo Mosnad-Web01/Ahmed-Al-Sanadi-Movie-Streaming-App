@@ -23,7 +23,7 @@ const Banner = ({
 }) => {
   const [imgSrc, setImgSrc] = useState(getImageUrl("BACKDROP", "ORIGINAL", path));
   return (
-    <div className="relative h-96 md:h-[80vh]">
+    <div className="relative h-96 md:h-[95vh]">
       <Image
         src={imgSrc}
         alt={title}

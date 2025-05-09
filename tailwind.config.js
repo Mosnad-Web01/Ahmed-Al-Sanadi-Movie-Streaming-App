@@ -11,6 +11,20 @@ module.exports = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        tmdb: {
+          primary: '#01b4e4',
+          secondary: '#90cea1',
+          dark: '#032541',
+        },
+      },
+      animation: {
+        'spin-slow': 'spin 3s linear infinite',
+        'gradient-shift': 'gradient-shift 8s ease infinite',
+        'fadeIn': 'fadeIn 0.3s ease-out forwards',
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
     },
   },

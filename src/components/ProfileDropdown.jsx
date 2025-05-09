@@ -32,7 +32,7 @@ const ProfileDropdown = () => {
             </div>
           </Link>
         ) : (
-          <FaUser size={20} />
+          <FaUser className="text-white" size={20} />
         )}
       </div>
       {/* Dropdown content */}

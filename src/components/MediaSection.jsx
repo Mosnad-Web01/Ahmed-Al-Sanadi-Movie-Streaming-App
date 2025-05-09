@@ -18,18 +18,6 @@ import {
   getMediaReleaseDate,
 } from "../services/mediaServices"
 
-
-/**
- * A reusable component for displaying a section of media (e.g., movies, TV shows) with a toggle switch for selecting the category.
- *
- * @param {string} title The title to display for the section.
- * @param {Array} toggleOptions An array of strings representing the options for the toggle switch.
- * @param {function} endpoint A function that takes a category and returns the API endpoint for fetching media.
- * @param {string} initialCategory The initial category to select.
- *
- * @returns {React.ReactElement} A React component for rendering the media section.
- */
-
 const MediaSection = ({ title, toggleOptions, endpoint, initialCategory }) => {
   //state for the selected category (e.g., "day" or "week" for trending|| or "streaming" , "on_tv", for Popular)
   const [selectedCategory, setSelectedCategory] = useState(initialCategory)
@@ -66,11 +54,17 @@ const MediaSection = ({ title, toggleOptions, endpoint, initialCategory }) => {
   const { media, loading, error } = state
 
   return (
-    <div className="container mx-auto font-custom px-4">
-      <div className="media-section">
-        {/* Title and Toggle Switch */}
-        <div className="toggle-switch flex items-center gap-4 mb-2">
-          <h2 className="text-2xl font-bold pl-4">{title}</h2>
+    <div className="container mx-auto font-custom px-4 relative">
+      {/* Section Gradient Border */}
+
+      
+      <div className="media-section py-6 relative">
+        {/* Title and Toggle Switch with enhanced styling */}
+        <div className="toggle-switch flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6 pl-2">
+          <h2 className="text-2xl font-bold relative inline-block">
+            {title}
+            <span className="absolute -bottom-1 left-0 w-12 h-0.5 bg-gradient-to-r from-[#01b4e4] to-[#90cea1]"></span>
+          </h2>
           <ToggleSwitch
             options={toggleOptions}
             selectedOption={selectedCategory}
@@ -78,13 +72,18 @@ const MediaSection = ({ title, toggleOptions, endpoint, initialCategory }) => {
           />
         </div>
 
-        {/* media content  */}
+        {/* media content with enhanced styling */}
         {loading ? (
-          <HorizontalSlider>
-            {[...Array(8)].map((_, index) => (
-              <MediaCardPlaceholder key={index} /> //skeleton media card
-            ))}
-          </HorizontalSlider>
+          <div className="relative">
+            <HorizontalSlider>
+              {[...Array(8)].map((_, index) => (
+                <MediaCardPlaceholder key={index} /> //skeleton media card
+              ))}
+            </HorizontalSlider>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-12 h-12 border-4 border-t-[#01b4e4] border-r-[#90cea1] border-b-[#01b4e4] border-l-[#90cea1] border-solid rounded-full animate-spin"></div>
+            </div>
+          </div>
         ) : media && media.length > 0 ? (
           <HorizontalSlider>
             {media.map((item) => (
@@ -100,12 +99,27 @@ const MediaSection = ({ title, toggleOptions, endpoint, initialCategory }) => {
           </HorizontalSlider>
         ) : (
           //if no media is available
-          <p>No media available.</p>
+          <div className="flex flex-col items-center justify-center p-10 rounded-xl bg-gradient-to-br from-gray-200/50 to-gray-100/50 dark:from-gray-800/50 dark:to-gray-900/50">
+            <svg className="w-16 h-16 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"></path>
+            </svg>
+            <p className="text-gray-600 dark:text-gray-300">No media available.</p>
+          </div>
         )}
 
-        {/* error message */}
-        {error && <p className="text-red-500">Failed to load media: {error}</p>}
+        {/* error message with enhanced styling */}
+        {error && (
+          <div className="mt-4 p-4 rounded-lg bg-gradient-to-r from-red-500/10 to-red-600/10 border border-red-500/20">
+            <p className="text-red-500 flex items-center">
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              Failed to load media: {error}
+            </p>
+          </div>
+        )}
       </div>
+      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[80%] h-px bg-gradient-to-r from-transparent via-[#01b4e4]/50 to-transparent"></div>
     </div>
   )
 }

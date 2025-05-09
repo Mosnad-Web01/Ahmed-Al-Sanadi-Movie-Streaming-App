@@ -5,34 +5,51 @@ const ToggleSwitch = ({ options, selectedOption, onChange }) => {
 
   return (
     <div className="toggle-switch">
-      {/* Original design for larger screens */}
+      {/* Desktop version with enhanced gradients */}
       <div className="hidden sm:inline-flex items-center gap-4">
-        <div className="bg-gray-300 dark:bg-black/40  rounded-full flex items-center shadow-lg shadow-teal-500/10 ">
+        <div className="bg-gray-200/80 backdrop-blur-sm p-1 rounded-full flex items-center shadow-lg dark:bg-gray-800/30">
           {options.map((option) => (
             <button
               key={option.value}
-              className={`py-1 px-4 rounded-full transition-all duration-700 ${
+              className={`py-1.5 px-5 rounded-full transition-all duration-500 font-medium text-sm relative z-10 overflow-hidden ${
                 selectedOption === option.value
-                  ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white focus:ring-pink-500 shadow-lg shadow-pink-500/50"
-                  : "text-gray-600"
+                  ? "text-white shadow-xl" 
+                  : "text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white"
               }`}
               onClick={() => onChange(option.value)}
+              style={{
+                background: selectedOption === option.value 
+                  ? "linear-gradient(135deg, rgba(1,180,228,1) 0%, rgba(144,206,161,1) 100%)" 
+                  : "transparent",
+                boxShadow: selectedOption === option.value 
+                  ? "0 4px 15px rgba(1,180,228,0.3)" 
+                  : "none"
+              }}
             >
-              {option.label}
+              <span className="relative z-10">{option.label}</span>
+              {selectedOption === option.value && (
+                <span className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-teal-500/20 blur-md z-0"></span>
+              )}
             </button>
           ))}
         </div>
       </div>
 
-      {/* Dropdown for small screens with gradient background */}
+      {/* Mobile dropdown with enhanced styling */}
       <div className="sm:hidden relative">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="inline-flex justify-between items-center w-full rounded-full bg-gradient-to-b from-[#032541] to-[#01b4e4] px-4 py-2 text-sm font-medium text-white"
+          className="inline-flex justify-between items-center w-full rounded-full shadow-lg px-5 py-2.5 text-sm font-medium text-white relative overflow-hidden"
+          style={{
+            background: "linear-gradient(135deg, rgba(3,37,65,1) 0%, rgba(1,180,228,1) 100%)",
+          }}
         >
-          {options.find(option => option.value === selectedOption)?.label}
+          <span className="relative z-10">
+            {options.find(option => option.value === selectedOption)?.label}
+          </span>
           <svg
-            className="-mr-1 ml-2 h-5 w-5"
+            className="-mr-1 ml-2 h-5 w-5 relative z-10 transition-transform duration-300"
+            style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0)' }}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
@@ -44,25 +61,31 @@ const ToggleSwitch = ({ options, selectedOption, onChange }) => {
               clipRule="evenodd"
             />
           </svg>
+          <span className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-cyan-500/10 blur-sm"></span>
         </button>
+
         {isOpen && (
-          <div className="absolute z-10 mt-1 w-full bg-gradient-to-b from-[#01b4e4] to-[#90cea1] rounded-md shadow-lg">
-            {options.map((option) => (
-              <button
-                key={option.value}
-                className={`block w-full text-left px-4 py-2 text-sm ${
-                  selectedOption === option.value
-                    ? "bg-white bg-opacity-20 text-white"
-                    : "text-[#032541] hover:bg-white hover:bg-opacity-10"
-                }`}
-                onClick={() => {
-                  onChange(option.value);
-                  setIsOpen(false);
-                }}
-              >
-                {option.label}
-              </button>
-            ))}
+          <div className="absolute z-50 mt-2 w-full rounded-xl shadow-2xl overflow-hidden backdrop-blur-sm animate-fadeIn">
+            <div className="p-0.5 bg-gradient-to-br from-[#01b4e4] via-[#90cea1] to-[#01b4e4]">
+              <div className="bg-white dark:bg-gray-900 rounded-lg overflow-hidden">
+                {options.map((option) => (
+                  <button
+                    key={option.value}
+                    className={`block w-full text-left px-4 py-3 text-sm transition-all duration-300 ${
+                      selectedOption === option.value
+                        ? "bg-gradient-to-r from-[#01b4e4]/20 to-[#90cea1]/20 text-[#032541] dark:text-white font-medium"
+                        : "text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+                    }`}
+                    onClick={() => {
+                      onChange(option.value);
+                      setIsOpen(false);
+                    }}
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         )}
       </div>

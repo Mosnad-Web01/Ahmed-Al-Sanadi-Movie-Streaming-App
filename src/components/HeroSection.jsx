@@ -40,6 +40,7 @@ const HeroSection = () => {
           <p className="text-lg md:text-xl mb-8 text-[#032541] dark:text-gray-200 font-medium drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)] dark:drop-shadow-none">
             {t("hero.readyToWatch")}
           </p>
+          
 
           {!currentUser && (
             <div className="flex flex-col sm:flex-row gap-2 w-full max-w-[600px] mx-auto">

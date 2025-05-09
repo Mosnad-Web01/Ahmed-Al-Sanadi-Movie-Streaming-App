@@ -54,7 +54,7 @@ export default async function RootLayout({ children, params: { locale } }) {
         >
           <main>
             <Navbar />
-            <div className="relative">
+            <div className="relative  min-h-100">
               {children}
               <ToastContainer />
             </div>
