@@ -1,5 +1,5 @@
 import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
-import { db } from "../firebase/config"; // Ensure you have the Firebase config here
+import { db } from "../firebase/config"; 
 
 
 async function toggleLikeMedia(mediaId, mediaType, isLiked, currentUser) {
@@ -16,7 +16,7 @@ async function toggleLikeMedia(mediaId, mediaType, isLiked, currentUser) {
       field = "likedMovies";
       break;
     case "tv":
-      field = "LikedTvShows";
+      field = "likedTvShows";
       break;
     case "actor":
       field = "likedActors";

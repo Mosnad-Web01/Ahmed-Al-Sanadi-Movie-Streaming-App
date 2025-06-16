@@ -1,4 +1,4 @@
-//src/contexts/AuthContext.js
+// src/contexts/AuthContext.js
 "use client"
 import { createContext, useContext, useState, useEffect } from "react"
 import { auth, db } from "../firebase/config"
@@ -8,7 +8,7 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth"
-import { doc, setDoc, getDoc } from "firebase/firestore" // import getDoc to fetch user data
+import { doc, setDoc, getDoc } from "firebase/firestore"
 import Cookies from "js-cookie"
 
 const AuthContext = createContext()
@@ -20,6 +20,21 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null)
   const [loading, setLoading] = useState(true)
+
+  // Helper function to set auth cookie
+  const setAuthCookie = async (user) => {
+    try {
+      const token = await user.getIdToken(true) // Force refresh
+      Cookies.set("currentUser", token, { 
+        expires: 1,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax'
+      })
+      console.log('Auth cookie set successfully')
+    } catch (error) {
+      console.error('Error setting auth cookie:', error)
+    }
+  }
 
   // sign up function with Firestore integration
   async function signup(name, email, password) {
@@ -43,13 +58,15 @@ export function AuthProvider({ children }) {
     // fetch the full user profile from Firestore
     const userProfile = await getUserProfile(user.uid)
 
+    // Set auth cookie
+    await setAuthCookie(user)
+
+    const userData = { uid: user.uid, email: user.email, ...userProfile }
+    setCurrentUser(userData)
+    
+    // Refresh user data after setting state
     await refreshUserData()
 
-    // store auth token in cookie
-    const token = await user.getIdToken()
-    Cookies.set("currentUser", token, { expires: 1 })
-
-    setCurrentUser({ uid: user.uid, email: user.email, ...userProfile }) // Set full user data
     return user
   }
 
@@ -65,39 +82,59 @@ export function AuthProvider({ children }) {
     // fetch the full user profile from Firestore
     const userProfile = await getUserProfile(user.uid)
 
+    // Set auth cookie
+    await setAuthCookie(user)
+
+    const userData = { uid: user.uid, email: user.email, ...userProfile }
+    setCurrentUser(userData)
+    
+    // Refresh user data after setting state
     await refreshUserData()
 
-    // store auth token in cookie
-    const token = await user.getIdToken()
-    Cookies.set("currentUser", token, { expires: 1 })
-
-    setCurrentUser({ uid: user.uid, email: user.email, ...userProfile }) // set full user data
     return user
   }
 
   // fetch user profile from Firestore
   async function getUserProfile(uid) {
-    const userDoc = await getDoc(doc(db, "users", uid))
-    return userDoc.exists() ? userDoc.data() : null // Return user data if it exists
+    try {
+      const userDoc = await getDoc(doc(db, "users", uid))
+      return userDoc.exists() ? userDoc.data() : null
+    } catch (error) {
+      console.error('Error fetching user profile:', error)
+      return null
+    }
   }
 
   async function logout() {
-    await signOut(auth)
-    Cookies.remove("currentUser") // Remove cookie on logout
-    setCurrentUser(null)
+    try {
+      await signOut(auth)
+      Cookies.remove("currentUser")
+      setCurrentUser(null)
+      console.log('User logged out successfully')
+    } catch (error) {
+      console.error('Error during logout:', error)
+    }
   }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      console.log('Auth state changed:', !!user)
+      
       if (user) {
-        // fetch the full user profile from Firestore when the user is authenticated
-        const userProfile = await getUserProfile(user.uid)
+        try {
+          // fetch the full user profile from Firestore when the user is authenticated
+          const userProfile = await getUserProfile(user.uid)
 
-        // Store auth token in cookie
-        const token = await user.getIdToken()
-        Cookies.set("currentUser", token, { expires: 1 })
+          // Set auth cookie
+          await setAuthCookie(user)
 
-        setCurrentUser({ uid: user.uid, email: user.email, ...userProfile }) // Set full user data
+          const userData = { uid: user.uid, email: user.email, ...userProfile }
+          setCurrentUser(userData)
+        } catch (error) {
+          console.error('Error in auth state change:', error)
+          setCurrentUser(null)
+          Cookies.remove("currentUser")
+        }
       } else {
         Cookies.remove("currentUser")
         setCurrentUser(null)
@@ -110,9 +147,15 @@ export function AuthProvider({ children }) {
 
   // Refresh user data when the user changes
   async function refreshUserData() {
-    if (currentUser) {
-      const userProfile = await getUserProfile(currentUser.uid)
-      setCurrentUser({ ...currentUser, ...userProfile })
+    if (currentUser?.uid) {
+      try {
+        const userProfile = await getUserProfile(currentUser.uid)
+        if (userProfile) {
+          setCurrentUser(prev => ({ ...prev, ...userProfile }))
+        }
+      } catch (error) {
+        console.error('Error refreshing user data:', error)
+      }
     }
   }
 
